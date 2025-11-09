@@ -1,0 +1,22 @@
+# Virtual Environment
+env/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# Data Brutes (je vais les exclures car sont trop volumineux et github peuvent les rejeter)
+data/raw/
+data/processed/jobs_clean.csv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+*.log
