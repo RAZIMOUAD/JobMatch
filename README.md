@@ -148,7 +148,7 @@ jobmatch/
 
 ### Search Results
 
-![Search Results](screenshots/search.png)
+![Search Results](screenshots/result.png)
 
 ### Job Details Modal
 
