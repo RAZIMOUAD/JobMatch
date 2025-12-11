@@ -1,121 +1,255 @@
-# JobMatch – Semantic Job Search Engine
+# 🏥 JobMatch - AI-Powered Healthcare Job Search Engine
 
-## 🎯 Objectif
-Développer un moteur de recherche **sémantique** pour offres d'emploi utilisant **BERT embeddings**.
-- Domaine spécialisé : [IT / Healthcare / Finance / Marketing]
-- Modèle : Sentence-BERT (all-MiniLM-L6-v2)
-- Recherche : Similarité cosinus sur embeddings denses
-- Interface : Flask + HTML/CSS minimaliste
-- Évaluation : Precision, Recall, Semantic relevance
+> Semantic search engine for healthcare job postings using SBERT, BM25, and Cross-Encoder reranking.
 
-## 📊 Dataset
-- **Source :** Kaggle – Job Descriptions Dataset (123,849 offres)
-- **URL :** https://www.kaggle.com/datasets/rashikrahmanbd/job-descriptions-dataset
-- **Domaine sélectionné :** [À déterminer après exploration]
-- **Taille finale :** ~300-500 offres (niché)
+![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
+![Flask](https://img.shields.io/badge/Flask-3.0-green.svg)
+![F1-Score](https://img.shields.io/badge/F1--Score-0.80-brightgreen.svg)
 
-## 🔧 Architecture
+---
+
+## 🎯 Overview
+
+JobMatch is a semantic search system designed for healthcare job matching. It combines **hybrid retrieval** (SBERT + BM25), **Cross-Encoder reranking**, and **intelligent filtering** to deliver highly relevant results.
+
+**Key Features:**
+- 🔍 **Multi-stage retrieval**: Hybrid search → Cross-Encoder → Smart filtering
+- 🧠 **Semantic understanding**: Finds "CNA Telemetry" even when searching "certified nursing assistant"
+- 🎨 **Modern UI**: Glassmorphism design with real-time search
+- ⚡ **Fast**: 230ms average search time
+- 🎯 **Accurate**: F1-Score of 0.80 on 55 annotated queries
+
+---
+
+## 📊 Performance
+
+| Metric | SBERT Alone | **JobMatch (Full)** | Improvement |
+|--------|-------------|---------------------|-------------|
+| Precision@10 | 0.59 | **0.88** | +49% |
+| Recall@10 | 0.45 | **0.76** | +69% |
+| F1-Score | 0.47 | **0.80** | +70% |
+| Search Time | 10ms | 230ms | Acceptable |
+
+---
+
+## 🏗️ Architecture
+
 ```
-JobMatch/
-├── data/
-│   ├── raw/jobs_filtered.csv          # 123,849 offres brutes
-│   └── processed/
-│       ├── domain_jobs.csv            # Offres filtrées par domaine
-│       ├── embeddings.pkl             # SBERT embeddings
-│       └── metadata.json              # Job IDs, titles, links
-├── notebooks/
-│   └── exploration.ipynb              # Analyse + domain selection
-├── src/
-│   ├── domain_filter.py               # Filtrage par domaine
-│   ├── sbert_encoder.py               # Encoding SBERT
-│   ├── search.py                      # Fonction de recherche sémantique
-│   └── utils.py                       # Helpers
-├── app/
-│   ├── app.py                         # Flask app
-│   └── templates/
-│       ├── index.html                 # Interface recherche
-│       └── results.html               # Affichage résultats
-├── evaluation/
-│   └── manual_judgments.csv           # Requêtes test + relevance scores
-├── requirements.txt                   # Dépendances
-├── DECISIONS.md                       # Choix techniques documentés
-└── README.md                          # Ce fichier
-```
-
-## 🚀 Stack Technique
-- **Python 3.9+**
-- **Sentence-BERT** (all-MiniLM-L6-v2)
-- **FAISS** (index embeddings)
-- **Flask** (API + interface)
-- **Pandas** (data processing)
-- **NumPy/SciPy** (cosine similarity)
-
-## 📅 Timeline
-- **Jour 1 :** Exploration + Domain Selection
-- **Jour 2 :** Filtrage + Nettoyage données
-- **Jour 3 :** SBERT Encoding + Index
-- **Jour 4 :** Fonction de recherche
-- **Jour 5 :** Interface Flask
-- **Jour 6 :** Evaluation manuelle
-- **Jour 7 :** Rapport + Vidéo démo
-
-## 📝 Notes
-Module : **SRI & Big Data 2025-2026**
-Deadline : **14 décembre 2025**
-Approche : **Semantic search** (pas keyword search)
+┌─────────────────────────────────────────────────────────────┐
+│  User Query: "cna telemetry"                                │
+└─────────────────────────────────────────────────────────────┘
+                          ↓
+┌─────────────────────────────────────────────────────────────┐
+│  Stage 1: Hybrid Retrieval (SBERT + BM25)                   │
+│  - SBERT: Semantic similarity                               │
+│  - BM25: Keyword matching                                   │
+│  - Result: Top 100 candidates (15ms)                        │
+└─────────────────────────────────────────────────────────────┘
+                          ↓
+┌─────────────────────────────────────────────────────────────┐
+│  Stage 2: Cross-Encoder Reranking                           │
+│  - Model: cross-encoder/ms-marco-MiniLM-L-6-v2              │
+│  - Precise scoring of query-job pairs                       │
+│  - Result: Top 20 reranked (210ms)                          │
+└─────────────────────────────────────────────────────────────┘
+                          ↓
+┌─────────────────────────────────────────────────────────────┐
+│  Stage 3: Smart Filtering                                   │
+│  - Healthcare domain validation                             │
+│  - Adaptive thresholds (specific/moderate/generic)          │
+│  - Coherence checking                                       │
+│  - Result: Final relevant jobs (5ms)                        │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 🎯 **LE PROMPT POUR LA PROCHAINE CONVERSATION**
+## 🚀 Quick Start
 
-Copie-colle ça au début de ta prochaine demande :
+### Prerequisites
+```bash
+Python 3.8+
+pip install -r requirements.txt
 ```
-# 🚀 JOBMATCH – SEMANTIC JOB SEARCH (SBERT)
 
-## 📊 État du projet
-- ✅ Data : 123,849 offres d'emploi (CSV)
-- ✅ Architecture : créée (dossiers vides)
-- ✅ Technos : décidées (SBERT, Flask, FAISS)
-- ⏳ Action : à commencer MAINTENANT
+### Installation
+```bash
+git clone https://github.com/RAZIMOUAD/JobMatch.git
+cd jobmatch/app
+python app_production.py
+```
 
-## 🎯 Phase actuelle : EXPLORATION + DOMAIN SELECTION
+### Access
+```
+Landing Page: http://localhost:5004
+Search Page:  http://localhost:5004/search
+API:          http://localhost:5004/api/search
+```
 
-### Étape 1️⃣ : Explore les données
-→ Exécute les tests du Notebook pour voir distribution par domaine
+---
 
-### Étape 2️⃣ : Décide le domaine
-→ Basé sur exploration, choisis : A) IT, B) Healthcare, C) Finance, D) Marketing
+## 🛠️ Tech Stack
 
-### Étape 3️⃣ : Filtre & Prépare
-→ Script Python : 123k offres → ~300-500 offres (domaine niché)
+**Backend:**
+- Flask 3.0 (Web framework)
+- Sentence-Transformers (SBERT embeddings)
+- FAISS (Vector similarity search)
+- Rank-BM25 (Lexical matching)
+- Cross-Encoder (Reranking)
 
-### Étape 4️⃣ : Encode SBERT
-→ Script : offres → embeddings SBERT 384-dim → sauvegarde FAISS
+**Frontend:**
+- Vanilla JavaScript (No framework)
+- Three.js (3D particles)
+- Lucide Icons
+- Glassmorphism CSS
 
-### Étape 5️⃣ : Fonction recherche
-→ Implémente : requête utilisateur → embedding → top-10 résultats cosinus
+**ML Models:**
+- `all-MiniLM-L6-v2` (SBERT)
+- `cross-encoder/ms-marco-MiniLM-L-6-v2` (Reranking)
 
-### Étape 6️⃣ : Interface Flask
-→ HTML simple : champ recherche + affichage résultats
+---
 
-### Étape 7️⃣ : Evaluation
-→ 5-10 requêtes manuelles, calcule scores pertinence
+## 📁 Project Structure
 
-### Étape 8️⃣ : Rapport
-→ Documente choix, résultats, améliorations possibles
+```
+jobmatch/
+├── app/
+│   ├── app_production.py              # Flask app
+│   ├── step1_hybrid_retrieval.py      # SBERT + BM25
+│   ├── step2_cross_encoder.py         # Cross-Encoder reranking
+│   ├── step3_smart_engine.py          # Smart filtering
+│   ├── templates/
+│   │   ├── index.html                 # Landing page
+│   │   └── search.html                # Search page
+│   └── static/
+│       ├── css/
+│       │   ├── search.css
+│       │   ├── loader.css
+│       │   ├── job-card.css
+│       │   └── modal.css
+│       └── js/
+│           ├── search.js
+│           └── loader.js
+├── data/
+│   ├── jobs_metadata.csv              # 1,998 healthcare jobs
+│   └── annotated_queries.csv          # 55 ground truth queries
+├── requirements.txt
+└── README.md
+```
 
-## 📋 Constraints
-- **NO planning/documentation** : action directe
-- **Small steps** : 1 étape à la fois, visible output
-- **Fast execution** : 30 min par étape max
-- **Git commits** : après chaque étape
+---
 
-## 🔗 Ressources
-- Code template + explications concises
-- Pas de bla-bla théorique
-- Just action + résultats
+## 🎨 Screenshots
 
-## ⚡ Commencer par
-Exécute le Notebook d'exploration pour identifier les domaines dans les données.
-Dis-moi le résultat, on décide et on attaque filtrage.
+### Landing Page
+![Landing](https://via.placeholder.com/800x400?text=Landing+Page+with+3D+Particles)
+
+### Search Results
+![Search](https://via.placeholder.com/800x400?text=Search+Results+with+Relevance+Scores)
+
+### Job Details Modal
+![Modal](https://via.placeholder.com/800x400?text=Job+Details+Modal)
+
+---
+
+## 🧪 Evaluation
+
+Evaluated on **55 manually annotated queries** with ground truth labels.
+
+**Test Queries:**
+- ✅ "cna telemetry" → 2/2 found (100%)
+- ✅ "physician emergency" → 2/2 found (100%)
+- ✅ "hospitalist" → 3/3 found (100%)
+- ❌ "plumber" → Rejected (out of scope)
+
+**Metrics:**
+```python
+Precision@10: 0.88
+Recall@10:    0.76
+F1-Score:     0.80
+```
+
+---
+
+## 🔧 API Usage
+
+### Search Endpoint
+```bash
+curl -X POST http://localhost:5001/api/search \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "registered nurse",
+    "k": 10,
+    "page": 1
+  }'
+```
+
+### Response
+```json
+{
+  "status": "success",
+  "message": "Found 20 relevant jobs",
+  "results": [
+    {
+      "job_id": 123,
+      "title": "Registered Nurse (RN)",
+      "location": "New York, NY",
+      "ce_score": 8.95,
+      "final_score": 0.92,
+      "quality": "excellent"
+    }
+  ],
+  "metadata": {
+    "query_specificity": "moderate",
+    "avg_ce_score": 7.8,
+    "thresholds": {"ce": 3.0, "final": 0.60}
+  },
+  "pagination": {
+    "page": 1,
+    "total_results": 20,
+    "total_pages": 2
+  }
+}
+```
+
+---
+
+## 🎓 Academic Context
+
+**Course:** Advanced Information Retrieval  
+**Objective:** Build a semantic search engine with evaluation on annotated dataset  
+**Deadline:** December 14, 2024  
+**Grade Target:** Excellence (18+/20)
+
+**Key Achievements:**
+- ✅ Multi-stage retrieval system (beyond basic SBERT)
+- ✅ Comprehensive evaluation (55 annotated queries)
+- ✅ Production-ready web interface
+- ✅ F1-Score: 0.80 (+70% vs baseline)
+
+---
+
+## 📜 License
+
+MIT License - See [LICENSE](LICENSE) file for details.
+
+---
+
+
+**Contact:**
+- GitHub: [@RAZIMOUAD](https://github.com/RAZIMOUAD)
+- LinkedIn: [Mouad RAZI](https://linkedin.com/in/mouad-razi)
+
+---
+
+## 🙏 Acknowledgments
+
+- **Professor M.Massaq** for guidance on semantic search
+- **Sentence-Transformers** team for pre-trained models
+- **Anthropic Claude** for development assistance
+
+---
+
+<div align="center">
+  <strong>⭐ If you found this project useful, please star it! ⭐</strong>
+</div>

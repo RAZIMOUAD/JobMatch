@@ -1,0 +1,450 @@
+{
+  "metadata": {
+    "created_date": "2024-12-04",
+    "total_queries": 55,
+    "dataset_size": 1998,
+    "purpose": "Evaluation rigoureuse du moteur de recherche Healthcare"
+  },
+  "queries": [
+    {
+      "id": 1,
+      "query": "registered nurse emergency",
+      "category": "specific",
+      "expected_behavior": "RN avec sp\u00e9cialisation urgence",
+      "min_expected_results": 3,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 2,
+      "query": "rn intensive care unit",
+      "category": "specific",
+      "expected_behavior": "RN en soins intensifs",
+      "min_expected_results": 3,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 3,
+      "query": "travel registered nurse",
+      "category": "specific",
+      "expected_behavior": "RN en mission",
+      "min_expected_results": 3,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 4,
+      "query": "registered nurse med surg",
+      "category": "specific",
+      "expected_behavior": "RN en m\u00e9decine-chirurgie",
+      "min_expected_results": 3,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 5,
+      "query": "licensed practical nurse",
+      "category": "specific",
+      "expected_behavior": "LPN g\u00e9n\u00e9ral",
+      "min_expected_results": 3,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 6,
+      "query": "lpn home health",
+      "category": "specific",
+      "expected_behavior": "LPN en soins \u00e0 domicile",
+      "min_expected_results": 3,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 7,
+      "query": "certified nursing assistant",
+      "category": "specific",
+      "expected_behavior": "CNA g\u00e9n\u00e9ral",
+      "min_expected_results": 3,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 8,
+      "query": "cna telemetry",
+      "category": "specific",
+      "expected_behavior": "CNA en t\u00e9l\u00e9m\u00e9trie",
+      "min_expected_results": 3,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 9,
+      "query": "physical therapist",
+      "category": "specific",
+      "expected_behavior": "PT g\u00e9n\u00e9ral",
+      "min_expected_results": 3,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 10,
+      "query": "physical therapist home health",
+      "category": "specific",
+      "expected_behavior": "PT \u00e0 domicile",
+      "min_expected_results": 3,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 11,
+      "query": "medical assistant",
+      "category": "specific",
+      "expected_behavior": "MA g\u00e9n\u00e9ral",
+      "min_expected_results": 3,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 12,
+      "query": "certified medical assistant",
+      "category": "specific",
+      "expected_behavior": "MA certifi\u00e9",
+      "min_expected_results": 3,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 13,
+      "query": "physician emergency medicine",
+      "category": "specific",
+      "expected_behavior": "M\u00e9decin urgentiste",
+      "min_expected_results": 3,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 14,
+      "query": "hospitalist physician",
+      "category": "specific",
+      "expected_behavior": "M\u00e9decin hospitalier",
+      "min_expected_results": 3,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 15,
+      "query": "surgical technician",
+      "category": "specific",
+      "expected_behavior": "Technicien chirurgical",
+      "min_expected_results": 3,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 16,
+      "query": "laboratory technician",
+      "category": "specific",
+      "expected_behavior": "Technicien de laboratoire",
+      "min_expected_results": 3,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 17,
+      "query": "radiology technologist",
+      "category": "specific",
+      "expected_behavior": "Technicien en radiologie",
+      "min_expected_results": 3,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 18,
+      "query": "occupational therapist",
+      "category": "specific",
+      "expected_behavior": "Ergoth\u00e9rapeute",
+      "min_expected_results": 3,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 19,
+      "query": "speech language pathologist",
+      "category": "specific",
+      "expected_behavior": "Orthophoniste",
+      "min_expected_results": 3,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 20,
+      "query": "dental hygienist",
+      "category": "specific",
+      "expected_behavior": "Hygi\u00e9niste dentaire",
+      "min_expected_results": 3,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 21,
+      "query": "nurse critical care",
+      "category": "moderate",
+      "expected_behavior": "Infirmi\u00e8re en soins critiques",
+      "min_expected_results": 2,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 22,
+      "query": "nurse practitioner",
+      "category": "moderate",
+      "expected_behavior": "Infirmi\u00e8re praticienne",
+      "min_expected_results": 2,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 23,
+      "query": "patient care technician",
+      "category": "moderate",
+      "expected_behavior": "Technicien en soins aux patients",
+      "min_expected_results": 2,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 24,
+      "query": "case manager healthcare",
+      "category": "moderate",
+      "expected_behavior": "Gestionnaire de cas m\u00e9dical",
+      "min_expected_results": 2,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 25,
+      "query": "clinical coordinator",
+      "category": "moderate",
+      "expected_behavior": "Coordinateur clinique",
+      "min_expected_results": 2,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 26,
+      "query": "therapist rehabilitation",
+      "category": "moderate",
+      "expected_behavior": "Th\u00e9rapeute en r\u00e9habilitation",
+      "min_expected_results": 2,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 27,
+      "query": "medical technician",
+      "category": "moderate",
+      "expected_behavior": "Technicien m\u00e9dical g\u00e9n\u00e9ral",
+      "min_expected_results": 2,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 28,
+      "query": "healthcare administrator",
+      "category": "moderate",
+      "expected_behavior": "Administrateur de sant\u00e9",
+      "min_expected_results": 2,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 29,
+      "query": "social worker hospital",
+      "category": "moderate",
+      "expected_behavior": "Travailleur social hospitalier",
+      "min_expected_results": 2,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 30,
+      "query": "respiratory care practitioner",
+      "category": "moderate",
+      "expected_behavior": "Praticien en soins respiratoires",
+      "min_expected_results": 2,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 31,
+      "query": "mental health counselor",
+      "category": "moderate",
+      "expected_behavior": "Conseiller en sant\u00e9 mentale",
+      "min_expected_results": 2,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 32,
+      "query": "nurse pediatric",
+      "category": "moderate",
+      "expected_behavior": "Infirmi\u00e8re p\u00e9diatrique",
+      "min_expected_results": 2,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 33,
+      "query": "clinic manager",
+      "category": "moderate",
+      "expected_behavior": "Directeur de clinique",
+      "min_expected_results": 2,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 34,
+      "query": "pharmacy technician",
+      "category": "moderate",
+      "expected_behavior": "Technicien en pharmacie",
+      "min_expected_results": 2,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 35,
+      "query": "health educator",
+      "category": "moderate",
+      "expected_behavior": "\u00c9ducateur en sant\u00e9",
+      "min_expected_results": 2,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 36,
+      "query": "healthcare job",
+      "category": "generic",
+      "expected_behavior": "N'importe quel job healthcare",
+      "min_expected_results": 1,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 37,
+      "query": "medical position",
+      "category": "generic",
+      "expected_behavior": "Poste m\u00e9dical g\u00e9n\u00e9ral",
+      "min_expected_results": 1,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 38,
+      "query": "health services",
+      "category": "generic",
+      "expected_behavior": "Services de sant\u00e9",
+      "min_expected_results": 1,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 39,
+      "query": "hospital job",
+      "category": "generic",
+      "expected_behavior": "Emploi hospitalier",
+      "min_expected_results": 1,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 40,
+      "query": "patient care",
+      "category": "generic",
+      "expected_behavior": "Soins aux patients",
+      "min_expected_results": 1,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 41,
+      "query": "clinical position",
+      "category": "generic",
+      "expected_behavior": "Poste clinique",
+      "min_expected_results": 1,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 42,
+      "query": "nursing job",
+      "category": "generic",
+      "expected_behavior": "Emploi en soins infirmiers",
+      "min_expected_results": 1,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 43,
+      "query": "healthcare professional",
+      "category": "generic",
+      "expected_behavior": "Professionnel de sant\u00e9",
+      "min_expected_results": 1,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 44,
+      "query": "medical staff",
+      "category": "generic",
+      "expected_behavior": "Personnel m\u00e9dical",
+      "min_expected_results": 1,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 45,
+      "query": "health career",
+      "category": "generic",
+      "expected_behavior": "Carri\u00e8re en sant\u00e9",
+      "min_expected_results": 1,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 46,
+      "query": "software engineer",
+      "category": "out_of_scope",
+      "expected_behavior": "NE doit PAS retourner de r\u00e9sultats",
+      "min_expected_results": 0,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 47,
+      "query": "salesforce developer",
+      "category": "out_of_scope",
+      "expected_behavior": "NE doit PAS retourner de r\u00e9sultats",
+      "min_expected_results": 0,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 48,
+      "query": "data scientist python",
+      "category": "out_of_scope",
+      "expected_behavior": "NE doit PAS retourner de r\u00e9sultats",
+      "min_expected_results": 0,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 49,
+      "query": "truck driver",
+      "category": "out_of_scope",
+      "expected_behavior": "NE doit PAS retourner de r\u00e9sultats",
+      "min_expected_results": 0,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 50,
+      "query": "accountant financial",
+      "category": "out_of_scope",
+      "expected_behavior": "NE doit PAS retourner de r\u00e9sultats",
+      "min_expected_results": 0,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 51,
+      "query": "graphic designer",
+      "category": "out_of_scope",
+      "expected_behavior": "NE doit PAS retourner de r\u00e9sultats",
+      "min_expected_results": 0,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 52,
+      "query": "marketing manager",
+      "category": "out_of_scope",
+      "expected_behavior": "NE doit PAS retourner de r\u00e9sultats",
+      "min_expected_results": 0,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 53,
+      "query": "construction worker",
+      "category": "out_of_scope",
+      "expected_behavior": "NE doit PAS retourner de r\u00e9sultats",
+      "min_expected_results": 0,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 54,
+      "query": "retail sales associate",
+      "category": "out_of_scope",
+      "expected_behavior": "NE doit PAS retourner de r\u00e9sultats",
+      "min_expected_results": 0,
+      "relevant_job_ids": []
+    },
+    {
+      "id": 55,
+      "query": "teacher elementary school",
+      "category": "out_of_scope",
+      "expected_behavior": "NE doit PAS retourner de r\u00e9sultats",
+      "min_expected_results": 0,
+      "relevant_job_ids": []
+    }
+  ]
+}

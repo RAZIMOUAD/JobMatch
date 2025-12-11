@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="JobMatch - AI-Powered Healthcare Job Search Engine">
+    <title>Search Results - JobMatch</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Fonts - Inter for body, JetBrains Mono for code/numbers -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Stylesheets (will be created in next steps) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/search.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/job-card.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
+</head>
+<body class="search-page">
+    
+    <!-- ================================================================ -->
+    <!-- LOADING OVERLAY (appears during search)                          -->
+    <!-- ================================================================ -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="loading-container">
+            <!-- Stage 1: Searching -->
+            <div class="loading-stage" data-stage="searching">
+                <div class="loading-icon">
+                    <i data-lucide="search" class="icon-lg"></i>
+                </div>
+                <h3 class="loading-title">Searching Database</h3>
+                <p class="loading-subtitle">Scanning 1,998 healthcare positions...</p>
+                <div class="loading-bar">
+                    <div class="loading-progress" data-progress="33"></div>
+                </div>
+            </div>
+            
+            <!-- Stage 2: Processing -->
+            <div class="loading-stage hidden" data-stage="processing">
+                <div class="loading-icon">
+                    <i data-lucide="cpu" class="icon-lg"></i>
+                </div>
+                <h3 class="loading-title">AI Processing</h3>
+                <p class="loading-subtitle">Analyzing semantic matches...</p>
+                <div class="loading-bar">
+                    <div class="loading-progress" data-progress="66"></div>
+                </div>
+            </div>
+            
+            <!-- Stage 3: Rendering -->
+            <div class="loading-stage hidden" data-stage="rendering">
+                <div class="loading-icon">
+                    <i data-lucide="sparkles" class="icon-lg"></i>
+                </div>
+                <h3 class="loading-title">Preparing Results</h3>
+                <p class="loading-subtitle">Ranking by relevance...</p>
+                <div class="loading-bar">
+                    <div class="loading-progress" data-progress="100"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================================================================ -->
+    <!-- MAIN LAYOUT: Sidebar (30%) + Results (70%)                       -->
+    <!-- ================================================================ -->
+    <div class="page-container">
+        
+        <!-- ============================================================ -->
+        <!-- SIDEBAR (30%)                                                -->
+        <!-- ============================================================ -->
+        <aside class="sidebar" id="sidebar">
+            
+            <!-- Logo & Brand -->
+            <div class="sidebar-header">
+                <a href="/" class="logo-link">
+                    <h1 class="logo">
+                        <span class="logo-icon">
+                            <i data-lucide="zap"></i>
+                        </span>
+                        JobMatch
+                    </h1>
+                </a>
+                <p class="tagline">AI-Powered Search</p>
+            </div>
+
+            <!-- Search Box -->
+            <div class="search-section">
+                <div class="search-box">
+                    <i data-lucide="search" class="search-icon"></i>
+                    <input 
+                        type="text" 
+                        id="searchInput"
+                        class="search-input" 
+                        placeholder="Try: registered nurse emergency"
+                        autocomplete="off"
+                        spellcheck="false"
+                    >
+                    <button class="search-clear hidden" id="clearBtn" aria-label="Clear search">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+                <button class="search-btn" id="searchBtn">
+                    <i data-lucide="arrow-right"></i>
+                    <span>Search</span>
+                </button>
+            </div>
+
+            <!-- Divider -->
+            <div class="sidebar-divider"></div>
+
+            <!-- Query Status Card -->
+            <div class="status-card" id="statusCard">
+                <div class="status-header">
+                    <i data-lucide="info" class="status-icon"></i>
+                    <h3 class="status-title">Query Status</h3>
+                </div>
+                
+                <div class="status-body">
+                    <!-- Status Badge -->
+                    <div class="status-badge-container">
+                        <span class="status-badge" id="statusBadge" data-status="idle">
+                            <span class="status-dot"></span>
+                            <span class="status-text">Ready</span>
+                        </span>
+                    </div>
+
+                    <!-- Metrics -->
+                    <div class="status-metrics">
+                        <div class="metric">
+                            <span class="metric-label">Query</span>
+                            <span class="metric-value" id="metricQuery">—</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Results</span>
+                            <span class="metric-value mono" id="metricResults">—</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Time</span>
+                            <span class="metric-value mono" id="metricTime">—</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Confidence</span>
+                            <span class="metric-value" id="metricConfidence">—</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="sidebar-divider"></div>
+
+            <!-- Filters Section (Collapsed by default) -->
+            <div class="filters-section">
+                <button class="filters-toggle" id="filtersToggle">
+                    <div class="filters-toggle-header">
+                        <i data-lucide="sliders-horizontal"></i>
+                        <span>Filters</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="toggle-icon"></i>
+                </button>
+                
+                <div class="filters-body hidden" id="filtersBody">
+                    <p class="filters-coming-soon">
+                        <i data-lucide="construction"></i>
+                        Advanced filters coming soon
+                    </p>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="sidebar-footer">
+                <div class="powered-by">
+                    <i data-lucide="cpu"></i>
+                    <span>SRI PROJECT</span>
+                </div>
+                <div class="version">v1.0-JobMatch</div>
+            </div>
+
+        </aside>
+
+        <!-- ============================================================ -->
+        <!-- RESULTS AREA (70%)                                           -->
+        <!-- ============================================================ -->
+        <main class="results-container" id="resultsContainer">
+            
+            <!-- Status Banner (appears based on API response) -->
+            <div class="status-banner hidden" id="statusBanner" data-type="info">
+                <div class="banner-icon">
+                    <i data-lucide="info"></i>
+                </div>
+                <div class="banner-content">
+                    <h4 class="banner-title" id="bannerTitle">Welcome</h4>
+                    <p class="banner-message" id="bannerMessage">Enter a search query to find healthcare jobs</p>
+                </div>
+                <button class="banner-close" id="bannerClose">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+
+            <!-- Results Header -->
+            <div class="results-header hidden" id="resultsHeader">
+                <div class="results-header-main">
+                    <h2 class="results-title" id="resultsTitle">Search Results</h2>
+                    <span class="results-count" id="resultsCount">0 jobs found</span>
+                </div>
+                <div class="results-header-actions">
+                    <button class="sort-btn" id="sortBtn">
+                        <i data-lucide="arrow-down-up"></i>
+                        <span>Sort by Relevance</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Results Grid -->
+            <div class="results-grid" id="resultsGrid">
+                <!-- Empty State (shown initially) -->
+                <div class="empty-state" id="emptyState">
+                    <div class="empty-icon">
+                        <i data-lucide="search-x" class="icon-xl"></i>
+                    </div>
+                    <h3 class="empty-title">No search yet</h3>
+                    <p class="empty-message">
+                        Enter a healthcare job title to start searching<br>
+                        <span class="empty-examples">Try: "registered nurse", "physical therapist", "cna telemetry"</span>
+                    </p>
+                </div>
+
+                <!-- Job Cards Container (populated by JS) -->
+                <div class="jobs-list hidden" id="jobsList">
+                    <!-- Job cards will be inserted here by search.js -->
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination hidden" id="pagination">
+                <button class="pagination-btn" id="prevBtn" disabled>
+                    <i data-lucide="chevron-left"></i>
+                    <span>Previous</span>
+                </button>
+                
+                <div class="pagination-pages" id="paginationPages">
+                    <!-- Page numbers inserted by JS -->
+                </div>
+                
+                <button class="pagination-btn" id="nextBtn" disabled>
+                    <span>Next</span>
+                    <i data-lucide="chevron-right"></i>
+                </button>
+            </div>
+
+        </main>
+
+    </div>
+
+    <!-- ================================================================ -->
+    <!-- JOB DETAILS MODAL                                                -->
+    <!-- ================================================================ -->
+    <div id="jobModal" class="job-modal hidden">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Job Details</h2>
+                <button class="modal-close" id="modalClose" aria-label="Close modal">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body" id="modalBody">
+                <!-- Content loaded by JS -->
+                <div class="modal-loading">
+                    <div class="spinner"></div>
+                    <p>Loading job details...</p>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="modal-btn-secondary" id="modalCloseBtn">
+                    Close
+                </button>
+                <button class="modal-btn-primary" id="modalApplyBtn">
+                    <i data-lucide="external-link"></i>
+                    <span>Apply Now</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================================================================ -->
+    <!-- SCRIPTS                                                          -->
+    <!-- ================================================================ -->
+    
+    <!-- Loader Logic -->
+    <script src="{{ url_for('static', filename='js/loader.js') }}"></script>
+    
+    <!-- Search Logic -->
+    <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+    
+    <!-- Initialize Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+
+</body>
+</html>

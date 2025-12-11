@@ -1,22 +1,44 @@
-# Virtual Environment
-env/
-venv/
-__pycache__/
-*.pyc
-*.pyo
-*.egg-info/
+
 
 # Data Brutes (je vais les exclures car sont trop volumineux et github peuvent les rejeter)
 data/raw/
 data/processed/jobs_clean.csv
 
-# IDE
-.vscode/
-.idea/
-*.swp
 
 # Jupyter
 .ipynb_checkpoints/
 
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+# Flask
+instance/
+.pytest_cache/
+
+# Data (optionnel si gros fichiers)
+*.csv
+*.pkl
+*.faiss
+
 # Logs
 *.log
+EOF
