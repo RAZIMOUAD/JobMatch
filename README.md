@@ -138,17 +138,24 @@ jobmatch/
 ```
 
 ---
+---
 
-## 🎨 Screenshots
+##  Screenshots
 
 ### Landing Page
-![Landing](https://via.placeholder.com/800x400?text=Landing+Page+with+3D+Particles)
+
+![Landing Page](screenshots/landing.png)
 
 ### Search Results
-![Search](https://via.placeholder.com/800x400?text=Search+Results+with+Relevance+Scores)
+
+![Search Results](screenshots/search.png)
 
 ### Job Details Modal
-![Modal](https://via.placeholder.com/800x400?text=Job+Details+Modal)
+
+![Job Details Modal](screenshots/modal.png)
+
+---
+
 
 ---
 

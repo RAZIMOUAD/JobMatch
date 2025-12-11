@@ -368,7 +368,8 @@ class UI {
             success: 'Success',
             warning: 'Low Confidence',
             error: 'Error',
-            rejected: 'Rejected'
+            rejected: 'Rejected',
+            unknown: 'Unknown'
         };
         
         statusText.textContent = statusLabels[status] || 'Unknown';
