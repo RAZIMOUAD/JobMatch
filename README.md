@@ -1,4 +1,4 @@
-# 🏥 JobMatch - AI-Powered Healthcare Job Search Engine
+# JobMatch - AI-Powered Healthcare Job Search Engine 🧬 
 
 > Semantic search engine for healthcare job postings using SBERT, BM25, and Cross-Encoder reranking.
 
@@ -8,16 +8,16 @@
 
 ---
 
-## 🎯 Overview
+##  Overview
 
 JobMatch is a semantic search system designed for healthcare job matching. It combines **hybrid retrieval** (SBERT + BM25), **Cross-Encoder reranking**, and **intelligent filtering** to deliver highly relevant results.
 
 **Key Features:**
-- 🔍 **Multi-stage retrieval**: Hybrid search → Cross-Encoder → Smart filtering
-- 🧠 **Semantic understanding**: Finds "CNA Telemetry" even when searching "certified nursing assistant"
-- 🎨 **Modern UI**: Glassmorphism design with real-time search
-- ⚡ **Fast**: 230ms average search time
-- 🎯 **Accurate**: F1-Score of 0.80 on 55 annotated queries
+-  **Multi-stage retrieval**: Hybrid search → Cross-Encoder → Smart filtering
+-  **Semantic understanding**: Finds "CNA Telemetry" even when searching "certified nursing assistant"
+-  **Modern UI**: Glassmorphism design with real-time search
+-  **Fast**: 230ms average search time
+-  **Accurate**: F1-Score of 0.80 on 55 annotated queries
 
 ---
 
@@ -32,7 +32,7 @@ JobMatch is a semantic search system designed for healthcare job matching. It co
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -64,7 +64,7 @@ JobMatch is a semantic search system designed for healthcare job matching. It co
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 ```bash
@@ -88,7 +88,7 @@ API:          http://localhost:5004/api/search
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 **Backend:**
 - Flask 3.0 (Web framework)
@@ -109,7 +109,7 @@ API:          http://localhost:5004/api/search
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 jobmatch/
@@ -159,7 +159,7 @@ jobmatch/
 
 ---
 
-## 🧪 Evaluation
+##  Evaluation
 
 Evaluated on **55 manually annotated queries** with ground truth labels.
 
@@ -178,7 +178,7 @@ F1-Score:     0.80
 
 ---
 
-## 🔧 API Usage
+##  API Usage
 
 ### Search Endpoint
 ```bash
@@ -221,7 +221,7 @@ curl -X POST http://localhost:5001/api/search \
 
 ---
 
-## 🎓 Academic Context
+##  Academic Context
 
 **Course:** Advanced Information Retrieval  
 **Objective:** Build a semantic search engine with evaluation on annotated dataset  
@@ -229,14 +229,14 @@ curl -X POST http://localhost:5001/api/search \
 **Grade Target:** Excellence (18+/20)
 
 **Key Achievements:**
-- ✅ Multi-stage retrieval system (beyond basic SBERT)
-- ✅ Comprehensive evaluation (55 annotated queries)
-- ✅ Production-ready web interface
-- ✅ F1-Score: 0.80 (+70% vs baseline)
+-  Multi-stage retrieval system (beyond basic SBERT)
+-  Comprehensive evaluation (55 annotated queries)
+-  Production-ready web interface
+-  F1-Score: 0.80 (+70% vs baseline)
 
 ---
 
-## 📜 License
+##  License
 
 MIT License - See [LICENSE](LICENSE) file for details.
 
@@ -249,14 +249,3 @@ MIT License - See [LICENSE](LICENSE) file for details.
 
 ---
 
-## 🙏 Acknowledgments
-
-- **Professor M.Massaq** for guidance on semantic search
-- **Sentence-Transformers** team for pre-trained models
-- **Anthropic Claude** for development assistance
-
----
-
-<div align="center">
-  <strong>⭐ If you found this project useful, please star it! ⭐</strong>
-</div>
